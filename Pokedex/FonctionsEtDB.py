@@ -21,19 +21,6 @@ if nombre_pokemons == 0:
     cur.execute("INSERT OR REPLACE INTO Pokemons (nom, type, niveau) VALUES ('Kaiminus', 'Eau', 16)")
     conn.commit()
 
-def ajouter_pokemon(nom, type, niveau):
-    commande = "INSERT OR REPLACE INTO Pokemons (nom, type, niveau) VALUES (?, ?, ?)"
-    cur.execute(commande, (nom, type, niveau))
-    conn.commit()
-
-def trouver_type(type_choisi):
-    cur.execute("SELECT * FROM Pokemons WHERE type = ?", (type_choisi,))
-    return cur.fetchall()
-
-def trouver_niveau(niveau_choisi):
-    cur.execute("SELECT * FROM Pokemons WHERE niveau >= ?", (niveau_choisi,))
-    return cur.fetchall()
-
 def affichage_recherche(liste_pokemons):
     if not liste_pokemons:
         print("[!] Aucun Pokemon trouvé !")
@@ -44,3 +31,24 @@ def affichage_recherche(liste_pokemons):
     for pokemon in liste_pokemons:
         print(f"{pokemon[1]:<15} | Type : {pokemon[2] :<12} | Niveau : {pokemon[3]}")      
     print("="*55)
+
+def ajouter_pokemon(nom, type, niveau):
+    commande = "INSERT OR REPLACE INTO Pokemons (nom, type, niveau) VALUES (?, ?, ?)"
+    cur.execute(commande, (nom, type, niveau))
+    conn.commit()
+
+def trouver_type(type_choisi):
+    choix = input("Quel est le type de Pokémon que vous cherchez ? ")
+    type_choisi = int(choix)
+    cur.execute("SELECT * FROM Pokemons WHERE type = ?", (type_choisi,))
+    resultat_type = cur.fetchall()
+    print(f"--- POKEMONS DE TYPE {type_choisi} : ---")
+    affichage_recherche(resultat_type)
+
+def trouver_niveau(niveau_choisi):
+    choix = input("Quel est le niveau minimum de Pokémon que vous cherchez ? ")
+    niveau_choisi = int(choix)
+    cur.execute("SELECT * FROM Pokemons WHERE niveau >= ?", (niveau_choisi,))
+    resultat_niveau = cur.fetchall()
+    print(f"--- POKEMONS DE NIVEAU ({niveau_choisi}+) : ---")
+    affichage_recherche(resultat_niveau)
