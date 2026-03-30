@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 conn = sqlite3.connect("SQL/Exo 3/pokemon.db")
 cur = conn.cursor()
@@ -32,20 +31,22 @@ def affichage_recherche(liste_pokemons):
         print(f"{pokemon[1]:<15} | Type : {pokemon[2] :<12} | Niveau : {pokemon[3]}")      
     print("="*55)
 
-def ajouter_pokemon(nom, type, niveau):
+def ajouter_pokemon():
+    nom = input("Quel est le nom du pokémon voulez vous rajouter ? ").strip().capitalize()
+    type = input("Son type : ").strip().capitalize()
+    niveau = input("Son niveau : ")
     commande = "INSERT OR REPLACE INTO Pokemons (nom, type, niveau) VALUES (?, ?, ?)"
-    cur.execute(commande, (nom, type, niveau))
+    cur.execute(commande, (nom, type, niveau,))
     conn.commit()
 
-def trouver_type(type_choisi):
-    choix = input("Quel est le type de Pokémon que vous cherchez ? ")
-    type_choisi = int(choix)
+def trouver_type ():
+    type_choisi = input("Quel est le type de Pokémon que vous cherchez ? ").strip().capitalize()
     cur.execute("SELECT * FROM Pokemons WHERE type = ?", (type_choisi,))
     resultat_type = cur.fetchall()
     print(f"--- POKEMONS DE TYPE {type_choisi} : ---")
     affichage_recherche(resultat_type)
 
-def trouver_niveau(niveau_choisi):
+def trouver_niveau():
     choix = input("Quel est le niveau minimum de Pokémon que vous cherchez ? ")
     niveau_choisi = int(choix)
     cur.execute("SELECT * FROM Pokemons WHERE niveau >= ?", (niveau_choisi,))

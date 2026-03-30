@@ -1,3 +1,5 @@
+import FonctionsEtDB
+
 # MENU
 print("--- POKEDEX ---")
 print("\nMENU PRINCIPAL : " \
@@ -9,6 +11,8 @@ choix = input("\nQUE VOULEZ-VOUS FAIRE ? ")
 
 # CHOIX UTILISATEUR
 if choix == "1":
+    pass
 if choix == "2":
+   trouver_type() 
 if choix == "3":
 if choix == "4":
