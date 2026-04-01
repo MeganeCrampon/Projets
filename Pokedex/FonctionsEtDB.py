@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("SQL/Exo 3/pokemon.db")
+conn = sqlite3.connect("pokemon.db")
 cur = conn.cursor()
 
 cur.execute('''
@@ -30,6 +30,11 @@ def affichage_recherche(liste_pokemons):
     for pokemon in liste_pokemons:
         print(f"{pokemon[1]:<15} | Type : {pokemon[2] :<12} | Niveau : {pokemon[3]}")      
     print("="*55)
+
+def afficher_pokedex():
+    cur.execute("SELECT * FROM Pokemons")
+    pokedex_complet = cur.fetchall()
+    affichage_recherche(pokedex_complet)
 
 def ajouter_pokemon():
     nom = input("Quel est le nom du pokémon voulez vous rajouter ? ").strip().capitalize()
