@@ -58,3 +58,10 @@ def trouver_niveau():
     resultat_niveau = cur.fetchall()
     print(f"--- POKEMONS DE NIVEAU ({niveau_choisi}+) : ---")
     affichage_recherche(resultat_niveau)
+
+def supprimer_pokemon():
+    choix = input("Quel est l'id du Pokémon que vous voulez supprimer ?")
+    id_choisi = int(choix)
+    cur.execute("DELETE FROM Pokemons WHERE id = ?", (id_choisi,))
+    conn.commit()
+    print(f"Le Pokémon n°{id_choisi} a bien été supprimé.")

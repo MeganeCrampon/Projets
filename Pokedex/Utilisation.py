@@ -7,7 +7,8 @@ print("\nMENU PRINCIPAL : " \
 "\n2. Chercher un Pokémon par type" \
 "\n3. Chercher un Pokémon par niveau" \
 "\n4. Ajouter un Pokémon" \
-"\n5. Quitter")
+"\n5. Supprimer un Pokémon" \
+"\n6. Quitter")
 
 while True :
     choix = input("\nQUE VOULEZ-VOUS FAIRE ? ")
@@ -22,5 +23,7 @@ while True :
     if choix == "4":
         ajouter_pokemon()
     if choix == "5":
+        supprimer_pokemon()
+    if choix == "6":
         print("Au revoir !")
         break
