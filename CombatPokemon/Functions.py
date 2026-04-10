@@ -1,4 +1,4 @@
-from Class import Pokemon, Starter, Dresseur 
+from Class import Attaque, Pokemon, Starter, Dresseur
 from Data import starters_dispo, Yuki, Thomas
 import random
 
