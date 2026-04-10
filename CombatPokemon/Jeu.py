@@ -1,7 +1,7 @@
-import Assets
+import Functions
 from Data import starters_dispo, Yuki, Thomas
 from Class import Pokemon, Starter, Dresseur 
 
-Assets.intro()
-Assets.dialogue_chêne()
-Assets.attribution_starter()
+Functions.intro()
+Functions.dialogue_chêne()
+Functions.attribution_starter()
