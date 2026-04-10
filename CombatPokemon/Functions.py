@@ -31,6 +31,18 @@ def attribution_starter():
     starters_dispo.remove(starter_Thomas)
     print(f"\nThomas a obtennu............{starter_Thomas} !!")
 
+def apprendre_attaque(nouvelle_attaque):
+    """if Pokemon.attaque == 4:
+    print(f"{Pokemon.nom_pk} connait déjà trop d'attaques. Voulez-vous lui faire en oublier une et apprendre {nouvelle_attaque} (O/N) ?")
+    choix = input("> ")
+    match choix :
+        case "O" :
+            pass
+        case "N" :
+            pass
+    """
+    pass
+
 def combat(pk_sauvage, pk_dresseur):
     pass
 
