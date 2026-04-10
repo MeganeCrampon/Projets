@@ -31,9 +31,15 @@ def attribution_starter():
     starters_dispo.remove(starter_Thomas)
     print(f"Thomas a obtennu............{starter_Thomas} !!")
 
+def combat(pk_sauvage, pk_dresseur):
+    pass
+
+def capture():
+    pass
+
 def utiliser_objet():
-    print("Que souhaitez vous utiliser ?")
     print(Dresseur.sac)
+    print("Que souhaitez vous utiliser ?")
     choix = input(" ").capitalize().strip()
 
 def rencontre_pk(pk_sauvage):
@@ -47,7 +53,7 @@ def rencontre_pk(pk_sauvage):
         > """)
     match choix :
         case "1":
-            pass
+            combat()
         case "2":
             pass
         case "3":
