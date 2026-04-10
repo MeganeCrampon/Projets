@@ -5,8 +5,9 @@ import random
 # FONCTIONS
 def intro():
     texte_intro = ["Vous êtes Yuki, une jeune apprentie dresseuse en quête d'aventure.",
-        "Avec votre ami et rival de toujours, Thomas, vous décidez de rendre visite au le Professeur Chêne, spécialiste des Pokémons.",
-        "C'est ainsi que vous vous rendez à son laboratoire, pour obtenir votre tout premier Pokémon chacun."]
+        "Avec votre ami et rival de toujours, Thomas, vous décidez de rendre visite au Professeur Chêne, spécialiste des Pokémons.",
+        "C'est ainsi que vous vous rendez à son laboratoire, pour obtenir votre tout premier Pokémon chacun.",
+        "...Vous vous retrouvez enfin face au grand Professeur Chêne.\n"]
     it_intro = iter(texte_intro)
     print("--- BIENVENUE DANS LE MONDE DES POKEMONS ---")
     for phrase in it_intro:
@@ -15,9 +16,8 @@ def intro():
 def dialogue_chêne():
     dial = ["Eh bien, bien le bonjour les enfants, qu'est ce qui vous ammène ?",
     "Oh mais oui, suis-je bête... Vous venez pour récupérer votre tout premier Pokémon : votre Starter !",
-    "Dans ce cas, mhh... innovons ! Ce sera le Pokémon qui vous choisira !"]
+    "Dans ce cas, mhh... innovons ! Ce sera le Pokémon qui vous choisira !\n"]
     it_dial = iter(dial)
-    print("Vous vous retrouvez enfin face au grand Professeur Chêne.")
     for phrase in it_dial:
         input(phrase)
 
@@ -29,7 +29,7 @@ def attribution_starter():
     starter_Thomas = random.choice(starters_dispo)
     Thomas.equipe.append(starter_Thomas)
     starters_dispo.remove(starter_Thomas)
-    print(f"Thomas a obtennu............{starter_Thomas} !!")
+    print(f"\nThomas a obtennu............{starter_Thomas} !!")
 
 def combat(pk_sauvage, pk_dresseur):
     pass
