@@ -1,4 +1,5 @@
 from Class import Pokemon, Starter, Dresseur 
+from Data import starters_dispo, Yuki, Thomas
 import random
 
 # FONCTIONS
@@ -21,16 +22,15 @@ def dialogue_chêne():
         input(phrase)
 
 def attribution_starter():
-    attribution = random.randint(1,4)
-    match attribution:
-        case "1" :
-            pass
-        case "2":
-            pass
-        case "3":
-            pass
+    starter_Yuki = random.choice(starters_dispo)
+    Yuki.equipe.append(starter_Yuki)
+    starters_dispo.remove(starter_Yuki)
+    print(f"Yuki a obtennu............{starter_Yuki} !!")
+    starter_Thomas = random.choice(starters_dispo)
+    Thomas.equipe.append(starter_Thomas)
+    starters_dispo.remove(starter_Thomas)
+    print(f"Thomas a obtennu............{starter_Thomas} !!")
 
-        
 def utiliser_objet():
     print("Que souhaitez vous utiliser ?")
     print(Dresseur.sac)
