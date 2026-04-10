@@ -1,4 +1,5 @@
 from Class import Pokemon, Starter, Dresseur 
+import random
 
 # FONCTIONS
 def intro():
@@ -10,6 +11,26 @@ def intro():
     for phrase in it_intro:
         input(phrase)
 
+def dialogue_chêne():
+    dial = ["Eh bien, bien le bonjour les enfants, qu'est ce qui vous ammène ?",
+    "Oh mais oui, suis-je bête... Vous venez pour récupérer votre tout premier Pokémon : votre Starter !",
+    "Dans ce cas, mhh... innovons ! Ce sera le Pokémon qui vous choisira !"]
+    it_dial = iter(dial)
+    print("Vous vous retrouvez enfin face au grand Professeur Chêne.")
+    for phrase in it_dial:
+        input(phrase)
+
+def attribution_starter():
+    attribution = random.randint(1,4)
+    match attribution:
+        case "1" :
+            pass
+        case "2":
+            pass
+        case "3":
+            pass
+
+        
 def utiliser_objet():
     print("Que souhaitez vous utiliser ?")
     print(Dresseur.sac)

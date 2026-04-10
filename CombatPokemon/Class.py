@@ -7,10 +7,10 @@ class Pokemon :
         self.niveau = niveau   
         self.attaques = attaques # 4 maximum
 
-class Starter(Pokemon):
+"""class Starter(Pokemon):
     def __init__(self, nom_pk, type_pk, xp, niveau, attaques, affection):
         super().__init__(nom_pk, type_pk, xp, niveau, attaques)
-        self.affection = affection # monte quand on termine un combat avec lui 
+        self.affection = affection # monte quand on termine un combat avec lui """
 
 class Dresseur :
     def __init__(self, nom_dr):
