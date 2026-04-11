@@ -1,4 +1,4 @@
-from Class import Attaque, Pokemon, Starter, Dresseur
+from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 
 # ATTRIBUTION DES CLASSES
 # Dresseurs
@@ -20,12 +20,12 @@ aspicot = Pokemon("Aspicot", "Insecte", 4)
 roucool = Pokemon("Roucool", "Vol", 4)
 
 # Attaques
-charge = Attaque("Charge", "Normal", 40)
-pistolet_o = Attaque("Pistolet à O", "Eau", 40)
-flammeche = Attaque("Flammeche", "Feu", 40)
-morsure = Attaque("Morsure", "Ténébres", 30)
-eclair = Attaque("Eclair", "Electrique", 40)
-dard_venin = Attaque("Dard-Venin", "Poison", 20)
+charge = Attaque("Charge", "Normal", 40, 15)
+pistolet_o = Attaque("Pistolet à O", "Eau", 40, 12)
+flammeche = Attaque("Flammeche", "Feu", 40, 12)
+morsure = Attaque("Morsure", "Ténébres", 30, 14)
+eclair = Attaque("Eclair", "Electrique", 40, 12)
+dard_venin = Attaque("Dard-Venin", "Poison", 20, 12)
 
 # Attributions attaques
 bulbizarre.attaques.append(charge)
@@ -36,3 +36,10 @@ rattata.attaques.append(morsure)
 abo.attaques.append(dard_venin)
 aspicot.attaques.append(dard_venin)
 roucool.attaques.append(charge)
+
+# Objets
+potion = Objet("Potion", 20, 20)
+super_po = Objet("Super-potion", 100, 50)
+rappel = Objet("Rappel", 100, )
+ether = Objet("Ether", 80, 5) # +5pp à une attaque au choix 
+pokeball = Objet("Pokéball", 20, )
