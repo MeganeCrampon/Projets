@@ -39,7 +39,8 @@ class Dresseur :
         return f"Nom : {self.nom}"
 
 class Objet :
-    def __init__(self, nom_obj, prix, effet):
+    def __init__(self, nom_obj, prix, effet, type_obj):
         self.nom = nom_obj
         self.prix = prix
         self.effet = effet
+        self.type = type_obj # "soin", "capture"
