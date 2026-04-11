@@ -49,16 +49,10 @@ def combat(pk_sauvage, pk_dresseur):
 def capture():
     pass
 
-def utiliser_potion():
+def utiliser_soins(nom_obj, valeur_soin):
     print("Quel Pokémon souhaitez-vous soigner ?\n")
     pk_cible = input("Nom : ").capitalize().strip()
-    print(f"Vous utilisez une potion sur {pk_cible}")
-
-def utiliser_super_potion():
-    print("Quel Pokémon souhaitez-vous soigner ?\n")
-    pk_cible = input("Nom : ").capitalize().strip()
-    print(f"Vous utilisez une super-potion sur {pk_cible}")
-    
+    print(f"Vous utilisez un.e {nom_obj} sur {pk_cible} (+{valeur_soin} PV)")
 
 def lancer_pokeball(pk_cible):
     print(f"Vous lancez une pokéball sur {pk_cible} !")
@@ -70,9 +64,9 @@ def utiliser_objet():
     choix = input(" ").capitalize().strip()
     match choix :
         case "Potion":
-            utiliser_potion()
+            utiliser_soins()
         case "Super-potion":
-            utiliser_super_potion()
+            utiliser_soins()
         case "Ether":
         case "Rappel":
         case "Pokéball":
