@@ -1,4 +1,4 @@
-from Class import Attaque, Pokemon, Starter, Dresseur
+from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 from Data import starters_dispo, Yuki, Thomas
 import random
 
@@ -32,7 +32,7 @@ def attribution_starter():
     print(f"\nThomas a obtennu............{starter_Thomas} !!")
 
 def apprendre_attaque(nouvelle_attaque):
-    """if Pokemon.attaque == 4:
+    """if Pokemon.attaque >= 4:
     print(f"{Pokemon.nom_pk} connait déjà trop d'attaques. Voulez-vous lui faire en oublier une et apprendre {nouvelle_attaque} (O/N) ?")
     choix = input("> ")
     match choix :
@@ -46,31 +46,48 @@ def apprendre_attaque(nouvelle_attaque):
 def combat(pk_sauvage, pk_dresseur):
     pass
 
-def capture():
-    pass
-
 def utiliser_soins(nom_obj, valeur_soin):
     print("Quel Pokémon souhaitez-vous soigner ?\n")
     pk_cible = input("Nom : ").capitalize().strip()
-    print(f"Vous utilisez un.e {nom_obj} sur {pk_cible} (+{valeur_soin} PV)")
+    if Yuki.sac.get(nom_obj, 0) > 0 :
+        print(f"Vous utilisez un.e {nom_obj} sur {pk_cible} (+{valeur_soin} PV)")
+        Yuki.sac[nom_obj] -= 1
+    else :
+        print(f"Vous n'avez plus de {nom_obj} !")
 
-def lancer_pokeball(pk_cible):
-    print(f"Vous lancez une pokéball sur {pk_cible} !")
+def utiliser_ether():
+    print("Quelle attaque voulez-vous régérénérer ?")
+    print(Pokemon.attaques)
+    atq_cible = input(" ").title().strip()
+    print(f"Vous utilisez un Ether sur {atq_cible} (+ 5pp)")
+
+def utiliser_rappel():
+    print("Quel Pokémon voulez-vous ramener à la vie ?")
+    print(Yuki.equipe)
+    pk_mort = input(" ").title().strip()
+    print(f"Vous utilisez un Rappel sur {pk_mort}")
+
+def lancer_pokeball(pk_sauvage):
+    print(f"Vous lancez une Pokéball sur {pk_sauvage} !")
     reussite = 
 
 def utiliser_objet():
-    print(Dresseur.sac)
-    print("Que souhaitez vous utiliser ?")
+    print(Yuki.sac)
+    print("Quel objet souhaitez-vous utiliser ?\n")
     choix = input(" ").capitalize().strip()
     match choix :
         case "Potion":
-            utiliser_soins()
+            utiliser_soins("Potion", 20)
         case "Super-potion":
-            utiliser_soins()
+            utiliser_soins("Super-potion", 50)
         case "Ether":
+            utiliser_ether()
         case "Rappel":
+            utiliser_rappel()
         case "Pokéball":
-            lancer_pokeball()
+            lancer_pokeball("Pokémon sauvage")
+        case _:
+            print("Objet non_présent dans le sac.")
 
 def rencontre_pk(pk_sauvage):
     print(f"Vous tombez sur un...{pk_sauvage} !!")
@@ -85,8 +102,8 @@ def rencontre_pk(pk_sauvage):
         case "1":
             combat()
         case "2":
-            pass
+            lancer_pokeball()
         case "3":
-            pass
+            utiliser_objet()
         case "4":
             print("Vous prenez la fuite !")

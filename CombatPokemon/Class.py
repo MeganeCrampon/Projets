@@ -32,7 +32,7 @@ class Dresseur :
     def __init__(self, nom_dr):
         self.nom = nom_dr
         self.equipe = []
-        self.sac = [] # Potion, Super-Potion, Ether, Rappel
+        self.sac = {} # Potion, Super-Potion, Ether, Rappel
         self.badge = 0
     def __str__(self):
         return f"{self.nom}"
@@ -45,3 +45,4 @@ class Objet :
         self.prix = prix
         self.effet = effet
         self.type = type_obj # "soin", "capture"
+        self.quantité = 0
