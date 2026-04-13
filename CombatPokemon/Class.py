@@ -1,10 +1,11 @@
 # CREATION DES CLASSES
 class Attaque :
-    def __init__(self, nom_atq, type_atq, puissance, pp):
+    def __init__(self, nom_atq, type_atq, puissance, pp_max):
         self.nom = nom_atq
         self.type = type_atq
         self.puissance = puissance
-        self.pp = pp
+        self.pp_max = pp_max
+        self.pp = pp_max
 
 class Pokemon :
     def __init__(self, nom_pk, type_pk, niveau, pv_max):
@@ -13,6 +14,7 @@ class Pokemon :
         self.xp = 0 # besoin de 20 pour passer de 1 à 2, 40 pour passer de 2 à 3... 
         self.niveau = niveau
         self.pv_max = pv_max
+        self.pv = pv_max
         self.attaques = [] # 4 maximum
     def __str__(self):
         return f"{self.nom}"
