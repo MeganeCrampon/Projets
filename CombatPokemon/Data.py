@@ -38,8 +38,8 @@ aspicot.attaques.append(dard_venin)
 roucool.attaques.append(charge)
 
 # Objets
-potion = Objet("Potion", 20, 20, "soin")
+"""potion = Objet("Potion", 20, 20, "soin")
 super_po = Objet("Super-potion", 100, 50, "soin")
 rappel = Objet("Rappel", 100,  ,"soin")
 ether = Objet("Ether", 80, 5, "soin") # +5pp à une attaque au choix 
-pokeball = Objet("Pokéball", 20,  ,"capture")
+pokeball = Objet("Pokéball", 20,  ,"capture")"""

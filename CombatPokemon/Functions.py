@@ -1,39 +1,34 @@
 from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 from Data import starters_dispo, Yuki, Thomas
+import Sounds
 import random
+import pygame
+import os
+import time
+
+pygame.mixer.init()
+
+dossier_actuel = os.path.dirname(__file__)
 
 # FONCTIONS
-def intro():
-    texte_intro = ["Vous êtes Yuki, une jeune apprentie dresseuse en quête d'aventure.",
-        "Avec votre ami et rival de toujours, Thomas, vous décidez de rendre visite au Professeur Chêne, spécialiste des Pokémons.",
-        "C'est ainsi que vous vous rendez à son laboratoire, pour obtenir votre tout premier Pokémon chacun.",
-        "...Vous vous retrouvez enfin face au grand Professeur Chêne.\n"]
-    it_intro = iter(texte_intro)
-    print("--- BIENVENUE DANS LE MONDE DES POKEMONS ---")
-    for phrase in it_intro:
-        input(phrase)
+def jouer_son(nom_son):
+    chemin = os.path.join(dossier_actuel, "sounds", nom_son)
+    son = pygame.mixer.Sound(chemin)
+    son.set_volume(0.6)
+    son.play()
 
-def dialogue_chêne():
-    dial = ["Eh bien, bien le bonjour les enfants, qu'est ce qui vous ammène ?",
-    "Oh mais oui, suis-je bête... Vous venez pour récupérer votre tout premier Pokémon : votre Starter !",
-    "Dans ce cas, mhh... innovons ! Ce sera le Pokémon qui vous choisira !\n"]
-    it_dial = iter(dial)
-    for phrase in it_dial:
-        input(phrase)
+def jouer_musique(nom_musique):
+    chemin = os.path.join(dossier_actuel, "sounds", nom_musique)
+    son = pygame.mixer.music.load(chemin)
+    pygame.mixer.music.set_volume(0.4)
+    pygame.mixer.music.play(-1)
 
-def attribution_starter():
-    starter_Yuki = random.choice(starters_dispo)
-    Yuki.equipe.append(starter_Yuki)
-    starters_dispo.remove(starter_Yuki)
-    print(f"Yuki a obtennu............{starter_Yuki} !!")
-    starter_Thomas = random.choice(starters_dispo)
-    Thomas.equipe.append(starter_Thomas)
-    starters_dispo.remove(starter_Thomas)
-    print(f"\nThomas a obtennu............{starter_Thomas} !!")
-
-def entrer_herbes_hautes():
-    pass
-    # definir "animation"
+def entrer_herbes_hautes(pkmn_sauvage):
+    jouer_son(Sounds.herbes)
+    print("Vous entrez dans des herbes hautes...")
+    time.sleep(0.1)
+    print(f"Vous tombez sur un {pkmn_sauvage} !!")
+    combat()
 
 def trouver_pkmn(nom, equipe):
     for pkmn in equipe :
@@ -59,8 +54,8 @@ def apprendre_attaque(nouvelle_attaque):
     """
     pass
 
-def combat(pk_sauvage, pk_dresseur):
-    pass
+def combat(pk_adverse, pk_dresseur):
+    print("")
 
 def utiliser_soins(nom_obj, valeur_soin):
     print("Quel Pokémon souhaitez-vous soigner ?\n")
@@ -150,6 +145,8 @@ def utiliser_objet(dresseur, pkmn_actif):
 
 def rencontre_pk(pk_sauvage):
     print(f"Vous tombez sur un...{pk_sauvage} !!")
+    jouer_musique(Sounds.m_combat)
+    time.sleep(0.1)
     print("\nQue voulez-vous faire (1/2/3/4) ? ")
     choix = input("""
         "1) Attaquer" \
