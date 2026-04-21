@@ -1,5 +1,6 @@
 from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 from Data import starters_dispo, Yuki, Thomas
+import Data
 import Sounds
 import random
 import pygame
@@ -11,6 +12,19 @@ pygame.mixer.init()
 dossier_actuel = os.path.dirname(__file__)
 
 # FONCTIONS
+def generer_pkmn(zone):
+    nom_choisi = random.choice(list(zone.keys()))
+    infos =  zone[nom_choisi]
+    nouveau_pk = Pokemon(
+        infos["nom"],
+        infos["type"],
+        infos["niveau"],
+        infos["pv"],
+        infos["cri"],
+        infos["attaques"]
+    )
+    return nouveau_pk
+
 def jouer_son(nom_son):
     chemin = os.path.join(dossier_actuel, "sounds", nom_son)
     son = pygame.mixer.Sound(chemin)
@@ -23,13 +37,27 @@ def jouer_musique(nom_musique):
     pygame.mixer.music.set_volume(0.4)
     pygame.mixer.music.play(-1)
 
+def cri_pkmn(nom_cri):
+    chemin = os.path.join(dossier_actuel, "sounds", "cris", nom_cri)
+    if os.path.exists(chemin):
+        son = pygame.mixer.Sound(chemin)
+        son.set_volume(0.6)
+        son.play()
+    else :
+        print(f"Erreur : Le fichier {chemin} est introuvable.")
+
 def entrer_herbes_hautes(pkmn_sauvage):
     jouer_son(Sounds.herbes)
     print("Vous entrez dans des herbes hautes...")
     time.sleep(1)
-    print(f"Vous tombez sur un {pkmn_sauvage} !!")
-    time.sleep(0.5)
-    rencontre_pk()
+    if random.random() < 0.6: # 60% de chance de rencontre
+        pkmn_sauvage = generer_pkmn()
+        print(f"Vous tombez sur un {pkmn_sauvage} !!")
+        pkmn_sauvage.cri()
+        time.sleep(0.5)
+        rencontre_pk()
+    else :
+        print("Vous n'êtes pas tombé sur un Pokémon sauvage cette fois-ci !") 
 
 def trouver_pkmn(nom, equipe):
     for pkmn in equipe :
@@ -44,7 +72,7 @@ def trouver_atq(nom, pkmn):
     return None
 
 def apprendre_attaque(nouvelle_attaque):
-    """if Pokemon.attaque >= 4:
+    """if Pokemon.attaques >= 4:
     print(f"{Pokemon.nom_pk} connait déjà trop d'attaques. Voulez-vous lui faire en oublier une et apprendre {nouvelle_attaque} (O/N) ?")
     choix = input("> ")
     match choix :

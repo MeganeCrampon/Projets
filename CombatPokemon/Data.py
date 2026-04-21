@@ -5,37 +5,65 @@ from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 Yuki = Dresseur("Yuki")
 Thomas = Dresseur("Thomas")
 
-# Starters
-bulbizarre = Pokemon("Bulbizarre", "Plante", 1, 45)
-salameche = Pokemon("Salamèche", "Feu", 1, 40)
-carapuce = Pokemon("Carapuce", "Eau", 1, 45)
-starters_dispo = [bulbizarre, salameche, carapuce]
-
-# Pokémons
-pikachu = Pokemon("Pikachu", "Electrique", 6, 40)
-rattata = Pokemon("Rattata", "Normal", 2, 32)
-abo = Pokemon("Abo", "Poison", 3, 36)
-caninos = Pokemon("Caninos", "Feu", 5, 58)
-aspicot = Pokemon("Aspicot", "Insecte", 4, 42)
-roucool = Pokemon("Roucool", "Vol", 4, 42)
-
 # Attaques
 charge = Attaque("Charge", "Normal", 40, 15)
 pistolet_o = Attaque("Pistolet à O", "Eau", 40, 12)
 flammeche = Attaque("Flammeche", "Feu", 40, 12)
 morsure = Attaque("Morsure", "Ténébres", 30, 14)
-eclair = Attaque("Eclair", "Electrique", 40, 12)
+eclair = Attaque("Eclair", "Electrik", 40, 12)
 dard_venin = Attaque("Dard-Venin", "Poison", 20, 12)
 
+# POKEDEX
+STARTERS = {
+    "bulbizarre" : {
+        "nom" : "Bulbizarre", 
+        "type" : "Plante", 
+        "niveau" : 1, 
+        "pv" : 45, 
+        "cri" : "",
+        "attaques" : [charge]
+    },
+    "salameche" : {
+        "nom" : "Salamèche", 
+        "type" : "Feu",
+        "niveau" : 1, 
+        "pv" : 40,
+        "cri" : "", 
+        "attaques" : [flammeche]
+    },
+    "carapuce" : {
+        "nom" : "Carapuce", 
+        "type" : "Eau",
+        "niveau" : 1, 
+        "pv" : 45,
+        "cri" : "", 
+        "attaques" : [pistolet_o]
+    },
+}
+starters_dispo = ["bulbizarre", "salameche", "carapuce"]
+
+ROUTE_01 = {
+"rattata" : {"Rattata", "Normal", 2, 32, "rattata.mp3"},
+"abo" : {"Abo", "Poison", 3, 36},
+"aspicot" : {"Aspicot", "Insecte", 2, 30},
+"roucool" : {"Roucool", "Vol", 3, 42}
+}
+
+ROUTE_02 = {
+"pikachu" : {"Pikachu", "Electrik", 6, 40},
+"caninos" : {"Caninos", "Feu", 5, 58},
+}
+
+
+
+
+
 # Attributions attaques
-bulbizarre.attaques.append(charge)
-salameche.attaques.append(flammeche)
-carapuce.attaques.append(pistolet_o)
-pikachu.attaques.append(eclair)
+"""pikachu.attaques.append(eclair)
 rattata.attaques.append(morsure)
 abo.attaques.append(dard_venin)
 aspicot.attaques.append(dard_venin)
-roucool.attaques.append(charge)
+roucool.attaques.append(charge)"""
 
 # Objets
 """potion = Objet("Potion", 20, 20, "soin")

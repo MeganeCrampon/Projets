@@ -1,3 +1,5 @@
+import Functions
+
 # CREATION DES CLASSES
 class Attaque :
     def __init__(self, nom_atq, type_atq, puissance, pp_max):
@@ -8,18 +10,45 @@ class Attaque :
         self.pp = pp_max
 
 class Pokemon :
-    def __init__(self, nom_pk, type_pk, niveau, pv_max):
+    def __init__(self, nom_pk, type_pk, niveau, pv_max, attaques_base, cri=None):
         self.nom = nom_pk
         self.type = type_pk
-        self.xp = 0 # besoin de 20 pour passer de 1 à 2, 40 pour passer de 2 à 3... 
         self.niveau = niveau
         self.pv_max = pv_max
         self.pv = pv_max
-        self.attaques = [] # 4 maximum
+        self.attaques = list(attaques_base) # 4 maximum
+        self.fichier_cri = cri
+        self.xp = 0 # besoin de 20 pour passer de 1 à 2, 40 pour passer de 2 à 3... 
+
     def __str__(self):
         return f"{self.nom}"
     def __repr__(self):
         return f"Nom : {self.nom} | Type : {self.type} | Niveau : {self.niveau}"
+    def faire_cri(self):
+        Functions.cri_pkmn(self.fichier_cri)
+    def apprendre_atq(self, nouvelle_atq):
+        if len(self.attaques) < 4:
+            self.attaques.append(nouvelle_atq)
+            print(f"{self.nom} apprend {nouvelle_atq} !")
+        elif len(self.attaques) >= 4:
+            print(f"{self.nom} connait déjà trop d'attaques. Voulez-vous lui faire en oublier une et apprendre {nouvelle_atq} (O/N) ?")
+            choix = int(input("> "))
+            match choix :
+                case "O" :
+                    print("Veuillez choisir quelle attaque oublier :")
+                    for i, nom_atq in enumerate(self.attaques):
+                        print(f"{i}) {nom_atq}")
+                    choix_atq = int(input("> "))
+                    print(f"Voulez vous vraiment oublier {choix_atq} ? (O/N)")
+                    validation = input("> ")
+                    if validation == "O":
+                        print(f"...Pouf ! {self.nom} oublie {choix_atq} et apprend {nouvelle_atq} !")
+                        self.attaques.pop(choix_atq)
+                        self.attaques.append(nouvelle_atq)
+                    else : 
+                        print(f"Vous décider de ne pas oublier {choix_atq} et donc de ne pas apprendre {nouvelle_atq} !")
+                case "N" :
+                    print(f"{self.nom} décide de ne pas apprendre {nouvelle_atq} !")
 
 class Starter(Pokemon):
     def __init__(self, nom_pk, type_pk, niveau, pv_max):

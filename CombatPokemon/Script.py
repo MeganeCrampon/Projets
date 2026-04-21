@@ -1,5 +1,6 @@
 from Class import Attaque, Pokemon, Starter, Dresseur, Objet
 from Data import starters_dispo, Yuki, Thomas
+import Data
 import Functions
 import Sounds
 import random
@@ -82,5 +83,5 @@ def route_01():
     "Vous appercevez des hautes herbes sur le chemin, et vous n'avez pas d'autre choix si vous vouler continuer votre route, que de les traverser.")
     time.sleep(1)
     pygame.mixer.music.fadeout(600)
-    Functions.entrer_herbes_hautes("Rattata")
-    pass
+    pkmn_sauvage = Functions.generer_pkmn(Data.ROUTE_01)
+    Functions.entrer_herbes_hautes(pkmn_sauvage)
