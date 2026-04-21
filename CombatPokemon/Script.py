@@ -66,20 +66,21 @@ def suite_aventure():
     "J'ai failli oublier, prenez ceci, c'est un Pokédex ! Il vous permettra de receuiller des informations sur chaque nouveau Pokémon que vous renconntrerez ! 'Tip-top' non !?",
     "..."
     "... Hm, bon...bref !!",
-    "Je vous souhaite de vivre de belles aventures les enfants, à bientôt !!"]
+    "Je vous souhaite de vivre de belles aventures les enfants, à bientôt !!\n"]
     it_dial = iter(dial)
     for phrase in it_dial:
         input(phrase)
-    Yuki.sac.append["Pokéballs", 5]
-    Thomas.sac.append["Pokéballs", 5]
+    time.sleep(0.5)
+    Yuki.ajouter_obj("Pokéball", 5)
+    Thomas.ajouter_obj("Pokéball", 5)
     Functions.jouer_son(Sounds.pop)
-    input("Vous récupèrer chacun 5 pokéballs dans votre sac !")
-    input("Vous décidez de partir tout de suite pour la première étape de votre aventure : la Route 01 !!")
+    time.sleep(2)
+    input("\nVous décidez de partir tout de suite pour la première étape de votre aventure : la Route 01 !!")
 
 def route_01():
     input("Vous vous dirigez vers la Route 01." \
     "Vous appercevez des hautes herbes sur le chemin, et vous n'avez pas d'autre choix si vous vouler continuer votre route, que de les traverser.")
     time.sleep(1)
     pygame.mixer.music.fadeout(600)
-    Functions.entrer_herbes_hautes()
+    Functions.entrer_herbes_hautes("Rattata")
     pass

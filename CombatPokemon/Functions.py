@@ -26,9 +26,10 @@ def jouer_musique(nom_musique):
 def entrer_herbes_hautes(pkmn_sauvage):
     jouer_son(Sounds.herbes)
     print("Vous entrez dans des herbes hautes...")
-    time.sleep(0.1)
+    time.sleep(1)
     print(f"Vous tombez sur un {pkmn_sauvage} !!")
-    combat()
+    time.sleep(0.5)
+    rencontre_pk()
 
 def trouver_pkmn(nom, equipe):
     for pkmn in equipe :
@@ -70,6 +71,7 @@ def utiliser_soins(nom_obj, valeur_soin):
             print("Pokémon non trouvé dans l'équipe !")
     else :
         print(f"Vous n'avez plus de {nom_obj} !")
+        rencontre_pk()
 
 def utiliser_ether(dresseur, pkmn_actif):
     if dresseur.sac.get("Ether", 0) > 0 :
@@ -90,6 +92,7 @@ def utiliser_ether(dresseur, pkmn_actif):
             print("Veuillez entrer un chiffre.")
     else :
             print(f"Vous n'avez plus d'Ether !")
+    rencontre_pk()
 
 def utiliser_rappel(dresseur):
     if dresseur.sac.get("Rappel", 0) > 0:
@@ -112,12 +115,14 @@ def utiliser_rappel(dresseur):
             print("Veuillez entrer un chiffre.")
     else :
         print("Vous n'avez plus de Rappel !")
+    rencontre_pk()
 
 def lancer_pokeball(pk_sauvage):
     print(f"Vous lancez une Pokéball sur {pk_sauvage} !")
-    # reussite = 
+    # reussite =
+    rencontre_pk() 
 
-def utiliser_objet(dresseur, pkmn_actif):
+def utiliser_objet(dresseur):
     sac_liste = list(dresseur.sac.keys())
     if not sac_liste:
         print("Votre sac est vide !")
@@ -135,7 +140,7 @@ def utiliser_objet(dresseur, pkmn_actif):
             elif nom_choisi == "Super-potion":
                 utiliser_soins("Super-potion", 50)
             elif nom_choisi == "Ether":
-                utiliser_ether(dresseur, pkmn_actif)
+                utiliser_ether()
             elif nom_choisi == "Rappel":
                 utiliser_rappel()
             elif nom_choisi == "Pokéball":
@@ -143,11 +148,10 @@ def utiliser_objet(dresseur, pkmn_actif):
     except ValueError:
         print("Objet non présent dans le sac.")
 
-def rencontre_pk(pk_sauvage):
-    print(f"Vous tombez sur un...{pk_sauvage} !!")
+def rencontre_pk():
     jouer_musique(Sounds.m_combat)
     time.sleep(0.1)
-    print("\nQue voulez-vous faire (1/2/3/4) ? ")
+    print("\nQue voulez-vous faire (1/2/3/4) ?")
     choix = input("""
         "1) Attaquer" \
         "2) Capturer" \
@@ -160,6 +164,6 @@ def rencontre_pk(pk_sauvage):
         case "2":
             lancer_pokeball()
         case "3":
-            utiliser_objet()
+            utiliser_objet(Yuki)
         case "4":
             print("Vous prenez la fuite !")

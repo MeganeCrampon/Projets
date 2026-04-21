@@ -40,6 +40,9 @@ class Dresseur :
         return f"{self.nom}"
     def __repr__(self):
         return f"Nom : {self.nom}"
+    def ajouter_obj(self, nom_obj, quantite):
+        self.sac[nom_obj] = self.sac.get(nom_obj, 0) + quantite
+        print(f"{self.nom} obtient {quantite} {nom_obj} !")
 
 class Objet :
     def __init__(self, nom_obj, prix, effet, type_obj):

@@ -22,5 +22,5 @@ time.sleep(1)
 Functions.jouer_musique(Sounds.m_base)
 Script.suite_aventure()
 
-print("--- EN ROUTE VERS LA ROUTE 01 !! ---")
+print("\n--- EN ROUTE VERS LA ROUTE 01 !! ---\n")
 Script.route_01()
