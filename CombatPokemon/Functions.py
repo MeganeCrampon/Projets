@@ -71,8 +71,8 @@ def trouver_atq(nom, pkmn):
             return atq
     return None
 
-def apprendre_attaque(nouvelle_attaque):
-    """if Pokemon.attaques >= 4:
+"""def apprendre_attaque(nouvelle_attaque):
+    if Pokemon.attaques >= 4:
     print(f"{Pokemon.nom_pk} connait déjà trop d'attaques. Voulez-vous lui faire en oublier une et apprendre {nouvelle_attaque} (O/N) ?")
     choix = input("> ")
     match choix :
@@ -80,8 +80,7 @@ def apprendre_attaque(nouvelle_attaque):
             pass
         case "N" :
             pass
-    """
-    pass
+    pass"""
 
 def combat(pk_adverse, pk_dresseur):
     print("")
@@ -145,10 +144,28 @@ def utiliser_rappel(dresseur):
         print("Vous n'avez plus de Rappel !")
     rencontre_pk()
 
-def lancer_pokeball(pk_sauvage):
-    print(f"Vous lancez une Pokéball sur {pk_sauvage} !")
-    # reussite =
-    rencontre_pk() 
+def lancer_pokeball(dresseur, pk_sauvage):
+    sac_liste = list(dresseur.sac.keys())
+    if not "Pokéball" in sac_liste:
+        print("Vous ne possèdez pas de Pokéball !")
+        time.sleep(0.5)
+        rencontre_pk()
+    else :
+        print(f"Vous lancez une Pokéball sur {pk_sauvage} !")
+        paliers = [0.3, 0.4, 0.5, 0.6, 0.7, 0.8] #30%, 40%...
+        chance_capture = paliers[min(dresseur.essais, len(paliers)-1)]
+        time.sleep(1)
+        input("La balle remue...")
+        input("...")
+        time.sleep(1)
+        if random.random() < chance_capture:
+            print(f"Bravo ! Vous avez réussi : {pk_sauvage} rejoint l'équipe !")
+            dresseur.equipe.append(pk_sauvage)
+            dresseur.essai = 0
+        else :
+            print(f"Zut ! Le Pokémon s'est libéré !")
+            dresseur.essai += 1
+            rencontre_pk()
 
 def utiliser_objet(dresseur):
     sac_liste = list(dresseur.sac.keys())
@@ -176,7 +193,7 @@ def utiliser_objet(dresseur):
     except ValueError:
         print("Objet non présent dans le sac.")
 
-def rencontre_pk():
+def rencontre_pk(dresseur, pk_sauvage):
     jouer_musique(Sounds.m_combat)
     time.sleep(0.1)
     print("\nQue voulez-vous faire (1/2/3/4) ?")
@@ -190,8 +207,8 @@ def rencontre_pk():
         case "1":
             combat()
         case "2":
-            lancer_pokeball()
+            lancer_pokeball(dresseur, pk_sauvage)
         case "3":
-            utiliser_objet(Yuki)
+            utiliser_objet(dresseur)
         case "4":
             print("Vous prenez la fuite !")
