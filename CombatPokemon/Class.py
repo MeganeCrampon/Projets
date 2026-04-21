@@ -16,10 +16,9 @@ class Pokemon :
         self.niveau = niveau
         self.pv_max = pv_max
         self.pv = pv_max
-        self.attaques = list(attaques_base) # 4 maximum
         self.fichier_cri = cri
+        self.attaques = list(attaques_base) # 4 maximum
         self.xp = 0 # besoin de 20 pour passer de 1 à 2, 40 pour passer de 2 à 3... 
-
     def __str__(self):
         return f"{self.nom}"
     def __repr__(self):

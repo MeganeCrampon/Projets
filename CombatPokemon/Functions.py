@@ -14,14 +14,14 @@ dossier_actuel = os.path.dirname(__file__)
 # FONCTIONS
 def generer_pkmn(zone):
     nom_choisi = random.choice(list(zone.keys()))
-    infos =  zone[nom_choisi]
+    infos = zone[nom_choisi]
     nouveau_pk = Pokemon(
         infos["nom"],
         infos["type"],
         infos["niveau"],
         infos["pv"],
-        infos["cri"],
-        infos["attaques"]
+        infos["attaques"],
+        infos["cri"]
     )
     return nouveau_pk
 
@@ -46,14 +46,14 @@ def cri_pkmn(nom_cri):
     else :
         print(f"Erreur : Le fichier {chemin} est introuvable.")
 
-def entrer_herbes_hautes(pkmn_sauvage):
+def entrer_herbes_hautes(zone):
     jouer_son(Sounds.herbes)
     print("Vous entrez dans des herbes hautes...")
     time.sleep(1)
     if random.random() < 0.6: # 60% de chance de rencontre
-        pkmn_sauvage = generer_pkmn()
+        pkmn_sauvage = generer_pkmn(zone)
         print(f"Vous tombez sur un {pkmn_sauvage} !!")
-        pkmn_sauvage.cri()
+        pkmn_sauvage.faire_cri()
         time.sleep(0.5)
         rencontre_pk()
     else :

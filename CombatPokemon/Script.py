@@ -40,7 +40,7 @@ def attribution_starter():
     Yuki.equipe.append(starter_Yuki)
     starters_dispo.remove(starter_Yuki)
     Functions.jouer_son(Sounds.recup_objet)
-    print(f"Yuki a été choisie par............{starter_Yuki} !! Il rejoint son équipe !")
+    print(f"Yuki a été choisie par............{starter_Yuki.capitalize()} !! Il rejoint son équipe !")
     time.sleep(2.5)
     print("\nEt maintenant, qui choisia Thomas ?")
     print("...")
@@ -49,7 +49,7 @@ def attribution_starter():
     Thomas.equipe.append(starter_Thomas)
     starters_dispo.remove(starter_Thomas)
     Functions.jouer_son(Sounds.recup_objet)
-    print(f"Thomas a été choisi par............{starter_Thomas} !! Il rejoint son équipe !\n")
+    print(f"Thomas a été choisi par............{starter_Thomas.capitalize()} !! Il rejoint son équipe !\n")
     time.sleep(1.5)
 
 def suite_aventure():
@@ -83,5 +83,4 @@ def route_01():
     "Vous appercevez des hautes herbes sur le chemin, et vous n'avez pas d'autre choix si vous vouler continuer votre route, que de les traverser.")
     time.sleep(1)
     pygame.mixer.music.fadeout(600)
-    pkmn_sauvage = Functions.generer_pkmn(Data.ROUTE_01)
-    Functions.entrer_herbes_hautes(pkmn_sauvage)
+    Functions.entrer_herbes_hautes(Data.ROUTE_01)

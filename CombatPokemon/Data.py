@@ -43,27 +43,59 @@ STARTERS = {
 starters_dispo = ["bulbizarre", "salameche", "carapuce"]
 
 ROUTE_01 = {
-"rattata" : {"Rattata", "Normal", 2, 32, "rattata.mp3"},
-"abo" : {"Abo", "Poison", 3, 36},
-"aspicot" : {"Aspicot", "Insecte", 2, 30},
-"roucool" : {"Roucool", "Vol", 3, 42}
+    "rattata" : {
+        "nom" : "Rattata", 
+        "type" : "Normal",
+        "niveau" : 2, 
+        "pv" : 32,
+        "cri" : "rattata.mp3", 
+        "attaques" : [morsure]
+    },
+    "abo" : {
+        "nom" : "Abo", 
+        "type" : "Poison",
+        "niveau" : 3, 
+        "pv" : 35,
+        "cri" : "abo.mp3", 
+        "attaques" : [dard_venin]
+    },
+    "aspicot" : {
+        "nom" : "Aspicot", 
+        "type" : "Insecte",
+        "niveau" : 2, 
+        "pv" : 30,
+        "cri" : "aspicot.mp3", 
+        "attaques" : [dard_venin]
+    },
+    "roucool" : {
+        "nom" : "Roucool", 
+        "type" : "Vol",
+        "niveau" : 3, 
+        "pv" : 40,
+        "cri" : "roucool.mp3", 
+        "attaques" : [charge]
+    },
 }
 
 ROUTE_02 = {
-"pikachu" : {"Pikachu", "Electrik", 6, 40},
-"caninos" : {"Caninos", "Feu", 5, 58},
+    "pikachu" : {
+        "nom" : "Pikachu", 
+        "type" : "Electrik",
+        "niveau" : 5, 
+        "pv" : 44,
+        "cri" : "pikachu.mp3", 
+        "attaques" : [eclair, charge]
+    },
+    "caninos" : {
+        "nom" : "Caninos", 
+        "type" : "Feu",
+        "niveau" : 5, 
+        "pv" : 53,
+        "cri" : "caninos.mp3", 
+        "attaques" : [flammeche, charge]
+    },
 }
 
-
-
-
-
-# Attributions attaques
-"""pikachu.attaques.append(eclair)
-rattata.attaques.append(morsure)
-abo.attaques.append(dard_venin)
-aspicot.attaques.append(dard_venin)
-roucool.attaques.append(charge)"""
 
 # Objets
 """potion = Objet("Potion", 20, 20, "soin")
