@@ -1,0 +1,198 @@
+
+* {
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+body{
+    margin: 5 auto;
+}
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgb(255, 237, 237);
+    justify-content: space-between;
+    height: 25vh;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.big-title {
+    color: black;
+    font-size: 65px;
+    margin-bottom: 3%;
+    margin-top: 1%;
+}
+
+.tagline {
+    font-size: 24px;
+    margin-right: 30px;
+    margin-top: 0%;
+    font-style: italic;
+}
+
+nav.nav {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    background-color: rgb(245, 179, 179);
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+nav.nav li a {
+    color: rgb(255, 255, 255);
+    font-size: 30px; 
+    font-weight: bolder;
+    margin-left: 25px;
+    margin-right: 25px; 
+    text-decoration: none;
+}
+
+section.corps {
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+}
+
+.presentation {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+}
+
+.text-presentation {
+    font-size: 15px;
+    font-style: oblique;
+    padding-left: 35px;
+    padding-right: 30px;
+}
+
+.ma-formation {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+    margin-top: 40px;
+}
+
+.titre-formation {
+    padding-left: 30px;
+    font-size: 17px;
+}
+
+.sous-titre-formation {
+    padding-left: 40px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.description-formation {
+    padding-left: 55px;
+    font-size: 13px;
+}
+
+.experience {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+    margin-top: 40px;
+}
+
+.titre-exp {
+    padding-left: 30px;
+}
+
+.description-exp {
+    padding-left: 40px;
+    font-style: italic;  
+}
+
+.mes-projets {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+    margin-top: 40px;
+}
+
+.titre-proj {
+    padding-left: 30px;
+}
+
+.description-proj {
+    padding-left: 40px;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.notion {
+    padding-left: 50px;
+    font-size: 12px;
+}
+
+.lien-proj {
+    font-size: 12px; 
+    border-radius: 12px;
+    background-color: rgb(242, 242, 242);
+    display: inline-block;
+    padding: 6px 10px;
+    text-align: center;
+    margin-left: 60px;
+    margin-top: 0%;
+}
+
+.mes-competences {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+    margin-top: 35px;
+}
+
+.liste-comp {
+    padding-left: 40px;
+}
+
+.graph {
+    width: 50%;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+}
+
+.me-contacter {
+    background-color: rgb(255, 237, 237);
+    font-size: 22px;
+    font-weight: bolder;
+    padding-left: 10px;
+    border-radius: 8px;
+    border-bottom: 2px solid #fcd3d3;
+    margin-top: 40px;
+}
+
+.lien-git {
+    padding-left: 40px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.mail-num {
+    padding-left: 40px;
+    font-style: italic;
+    font-size: 15px;
+}
