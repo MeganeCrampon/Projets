@@ -193,7 +193,7 @@ def utiliser_objet(dresseur):
     except ValueError:
         print("Objet non présent dans le sac.")
 
-def rencontre_pk(dresseur, pk_sauvage):
+def rencontre_pk(dresseur):
     jouer_musique(Sounds.m_combat)
     time.sleep(0.1)
     print("\nQue voulez-vous faire (1/2/3/4) ?")
@@ -207,7 +207,7 @@ def rencontre_pk(dresseur, pk_sauvage):
         case "1":
             combat()
         case "2":
-            lancer_pokeball(dresseur, pk_sauvage)
+            lancer_pokeball()
         case "3":
             utiliser_objet(dresseur)
         case "4":

@@ -1,5 +1,4 @@
 from Class import Attaque, Pokemon, Starter, Dresseur, Objet
-from Data import starters_dispo, Yuki, Thomas
 import Data
 import Functions
 import Sounds
@@ -36,9 +35,9 @@ def attribution_starter():
     print("Alors, par quel Pokémon sera choisie Yuki ?")
     print("...")
     time.sleep(1.5)
-    starter_Yuki = random.choice(starters_dispo)
-    Yuki.equipe.append(starter_Yuki)
-    starters_dispo.remove(starter_Yuki)
+    starter_Yuki = random.choice(Data.starters_dispo)
+    Data.Yuki.equipe.append(starter_Yuki)
+    Data.starters_dispo.remove(starter_Yuki)
     Functions.jouer_son(Sounds.recup_objet)
     print(f"Yuki a été choisie par............{starter_Yuki.capitalize()} !! Il rejoint son équipe !")
     time.sleep(2.5)
