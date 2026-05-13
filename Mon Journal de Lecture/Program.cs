@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Data.Sqlite;
 
 class Program
 {
     static void Main(string[] args)
     {
-        List<Livre> livres = new List<Livre>();
+        Database db = new Database();
+        db.InitDB();
+
         bool continuer = true;
         while (continuer)
         {
@@ -16,18 +19,21 @@ class Program
             switch (choix)
             {
                 case "1":
-                    AfficherLivre(livres);
+                    AfficherListeLivres(db);
                     break;
                 case "2":
-                    AjouterLivre(livres);
+                    AjouterLivre(db);
                     break;
                 case "3":
-                    MarquerCommeLu(livres);
+                    MarquerCommeLu(db);
                     break;
                 case "4":
-                    SupprimerLivre(livres);
+                    ChercherTitre(db); 
                     break;
                 case "5":
+                    SupprimerLivre(db);
+                    break;
+                case "6":
                     Console.WriteLine("Merci d'avoir utilisé votre bibliothèque personnelle ! Au revoir !");
                     continuer = false;
                     break;
@@ -44,20 +50,22 @@ class Program
         Console.WriteLine("1. Afficher les livres");
         Console.WriteLine("2. Ajouter un livre");
         Console.WriteLine("3. Marquer un livre comme lu");
-        Console.WriteLine("4. Supprimer un livre");
-        Console.WriteLine("5. Quitter");
+        Console.WriteLine("4. Chercher un livre par titre");
+        Console.WriteLine("5. Supprimer un livre");
+        Console.WriteLine("6. Quitter");
         Console.Write("Votre choix : ");
     }
 
-    static void AfficherLivre(List<Livre> livres)
+    static void AfficherListeLivres(Database db)
     {
-        Console.WriteLine("=== Liste de vos Livres ===");
-        if (livres != null)
+        var livres = db.ObtenirLivres();
+        if (livres.Count > 0)
         {
+            Console.WriteLine("=== Liste de vos Livres ===");
             for (int i = 0; i < livres.Count; i++)
             {
                 string statut = livres[i].EstLu ? "Lu" : "Non Lu";
-                Console.WriteLine($"[{i + 1}] {livres[i].Titre} - {livres[i].Auteur} - {livres[i].Genre} - {statut}");
+                Console.WriteLine($"[{i + 1}] {livres[i].Titre} - Auteur : {livres[i].Auteur} - Genre : {livres[i].Genre} - {statut}");
             }
         } 
         else 
@@ -67,7 +75,7 @@ class Program
             switch (validation.ToUpper())
             {
                 case "O":
-                    AjouterLivre(livres);
+                    AjouterLivre(db);
                     break;
                 case "N":
                     Console.WriteLine("Retour au menu principal.");
@@ -75,7 +83,7 @@ class Program
             }
         }
     }
-    static void AjouterLivre(List<Livre> livres)
+    static void AjouterLivre(Database db)
     {
         Console.WriteLine("Titre du livre : ");
         string titre = Console.ReadLine();
@@ -89,13 +97,14 @@ class Program
         string genre = Console.ReadLine();
         genre = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(genre.ToLower());
 
-        livres.Add(new Livre(titre, auteur, genre));
+        db.AjouterLivreDB(new Livre(titre, auteur, genre));
         Console.WriteLine("Livre ajouté avec succès !");
     }
 
-    static void MarquerCommeLu(List<Livre> livres)
+    static void MarquerCommeLu(Database db)
     {
-        AfficherLivre(livres);
+        var livres = db.ObtenirLivres();
+        AfficherListeLivres(db);
         Console.WriteLine("Entrez le numéro du livre que vous avez lu : ");
         string saisie = Console.ReadLine();
         int numero = int.Parse(saisie);
@@ -106,14 +115,44 @@ class Program
         }
         else
         {
-            livreLu.EstLu = true;
+            db.ChangerStatutDB(livreLu.Id, !livreLu.EstLu);
             Console.WriteLine($"Le livre '{livreLu.Titre}' a été marqué comme Lu !");
         }
     }
 
-    static void SupprimerLivre(List<Livre> livres)
+    static void ChercherTitre(Database db)
     {
-        AfficherLivre(livres);
+        var livres = db.ObtenirLivres();
+        Console.WriteLine("Entrez le titre du livre que vous cherchez : ");
+        string saisie = Console.ReadLine();
+        var livresTrouves = livres.FirstOrDefault(l => l.Titre.Contains(saisie, StringComparison.OrdinalIgnoreCase));
+        if (livresTrouves != null)
+        {
+            string statut = livresTrouves.EstLu ? "Lu" : "Non Lu";
+            Console.WriteLine($"Livres trouvés : {livresTrouves.Titre} - Auteur : {livresTrouves.Auteur} - Genre : {livresTrouves.Genre} - {statut}");
+        }
+        else
+        {
+            Console.WriteLine("Aucun livre trouvé avec ce titre.");
+            Console.WriteLine("Voulez-vous chercher un autre titre ? (O/N) : ");
+            string validation = Console.ReadLine();
+
+            switch (validation)
+            {
+                case "O":
+                    ChercherTitre(db);
+                    break;
+                case "N":
+                    Console.WriteLine("Retour au menu principal.");
+                    break;
+            }
+        }
+    }
+
+    static void SupprimerLivre(Database db)
+    {
+        var livres = db.ObtenirLivres();
+        AfficherListeLivres(db);
         Console.WriteLine("Entrez le numéro du livre que vous souhaitez supprimer : ");
         string saisie = Console.ReadLine();
         int numero = int.Parse(saisie);
@@ -123,10 +162,10 @@ class Program
         switch (validation.ToUpper())
         {
             case "O":
-                livres.Remove(LivreASupp);
+                db.SupprimerLivreDB(LivreASupp.Id);
                 Console.WriteLine("Livre supprimé avec succès !"); break;
             case "N":
                 Console.WriteLine("Suppression annulée."); break;
-            }
+        }
     }
 }
