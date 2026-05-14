@@ -16,7 +16,8 @@ public class Database
             TITRE TEXT NOT NULL,
             AUTEUR TEXT NOT NULL,
             GENRE TEXT NOT NULL,
-            EST_LU INTEGER NOT NULL DEFAULT 0
+            EST_LU INTEGER NOT NULL DEFAULT 0,
+            NOTE INTEGER NULL DEFAULT NULL
         )";
 
         var commande = connexion.CreateCommand();
@@ -46,7 +47,8 @@ public class Database
             )
             {
                 Id = Convert.ToInt32(cursor["ID"]),
-                EstLu = Convert.ToInt32(cursor["EST_LU"]) == 1
+                EstLu = Convert.ToInt32(cursor["EST_LU"]) == 1,
+                Note = cursor["NOTE"] == DBNull.Value? (int?)null : Convert.ToInt32(cursor["NOTE"])
             });
         }
         return livres;
@@ -57,7 +59,7 @@ public class Database
         using var connexion = new SqliteConnection(Connection);
         connexion.Open();
 
-        string request = "INSERT INTO Livres (TITRE, AUTEUR, GENRE, EST_LU) VALUES (@titre, @auteur, @genre, @estLu)";
+        string request = "INSERT INTO Livres (TITRE, AUTEUR, GENRE, EST_LU, NOTE) VALUES (@titre, @auteur, @genre, @estLu, @note)";
 
         var commande = connexion.CreateCommand();
         commande.CommandText = request;
@@ -66,6 +68,7 @@ public class Database
         commande.Parameters.AddWithValue("@auteur", livre.Auteur);
         commande.Parameters.AddWithValue("@genre", livre.Genre);
         commande.Parameters.AddWithValue("@estLu", livre.EstLu ? 1 : 0);
+        commande.Parameters.AddWithValue("@note", livre.Note.HasValue ? (object)livre.Note.Value : DBNull.Value);
 
         commande.ExecuteNonQuery();
     }
@@ -86,34 +89,20 @@ public class Database
         commande.ExecuteNonQuery();
     }
 
-    public List<Livre> ChercherTitreDB(string titre)
+    public void NoterLivreDB(int id, int note)
     {
         using var connexion = new SqliteConnection(Connection);
         connexion.Open();
 
-        string request = "SELECT * FROM Livres WHERE TITRE LIKE @titre";
+        string request = "UPDATE Livres SET NOTE = @note WHERE ID = @id";
 
         var commande = connexion.CreateCommand();
         commande.CommandText = request;
 
-        commande.Parameters.AddWithValue("@titre", $"%{titre}%");
+        commande.Parameters.AddWithValue("@note", note);
+        commande.Parameters.AddWithValue("@id", id);
 
-        var livresTrouve = new List<Livre>();
-
-        using var cursor = commande.ExecuteReader();
-        while (cursor.Read())
-        {
-            livresTrouve.Add(new Livre(
-                cursor["TITRE"].ToString(),
-                cursor["AUTEUR"].ToString(),
-                cursor["GENRE"].ToString()
-            )
-            {
-                Id = Convert.ToInt32(cursor["ID"]),
-                EstLu = Convert.ToInt32(cursor["EST_LU"]) == 1
-            });
-        }
-        return livresTrouve;
+        commande.ExecuteNonQuery();
     }
 
     public void SupprimerLivreDB(int id)

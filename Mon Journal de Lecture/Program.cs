@@ -7,6 +7,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         Database db = new Database();
         db.InitDB();
 
@@ -28,12 +29,15 @@ class Program
                     MarquerCommeLu(db);
                     break;
                 case "4":
-                    ChercherTitre(db); 
+                    ChercherTitre(db);
                     break;
                 case "5":
-                    SupprimerLivre(db);
+                    NoterLivre(db);
                     break;
                 case "6":
+                    SupprimerLivre(db);
+                    break;
+                case "7":
                     Console.WriteLine("Merci d'avoir utilisé votre bibliothèque personnelle ! Au revoir !");
                     continuer = false;
                     break;
@@ -51,9 +55,21 @@ class Program
         Console.WriteLine("2. Ajouter un livre");
         Console.WriteLine("3. Marquer un livre comme lu");
         Console.WriteLine("4. Chercher un livre par titre");
-        Console.WriteLine("5. Supprimer un livre");
-        Console.WriteLine("6. Quitter");
+        Console.WriteLine("5. Noter un livre");
+        Console.WriteLine("6. Supprimer un livre");
+        Console.WriteLine("7. Quitter");
         Console.Write("Votre choix : ");
+    }
+
+    static string AfficherEtoiles(int? note)
+    {
+        if (note == null) return "Non noté";
+        else if (note == 1) return "★☆☆☆☆";
+        else if (note == 2) return "★★☆☆☆";
+        else if (note == 3) return "★★★☆☆";
+        else if (note == 4) return "★★★★☆";
+        else if (note == 5) return "★★★★★";
+        else return "Note invalide";
     }
 
     static void AfficherListeLivres(Database db)
@@ -65,7 +81,7 @@ class Program
             for (int i = 0; i < livres.Count; i++)
             {
                 string statut = livres[i].EstLu ? "Lu" : "Non Lu";
-                Console.WriteLine($"[{i + 1}] {livres[i].Titre} - Auteur : {livres[i].Auteur} - Genre : {livres[i].Genre} - {statut}");
+                Console.WriteLine($"[{i + 1}] {livres[i].Titre} - Auteur : {livres[i].Auteur} - Genre : {livres[i].Genre} - {statut} - Note : {AfficherEtoiles(livres[i].Note)}");
             }
         } 
         else 
@@ -147,6 +163,21 @@ class Program
                     break;
             }
         }
+    }
+
+    static void NoterLivre(Database db)
+    {
+        var livres = db.ObtenirLivres();
+        AfficherListeLivres(db);
+        Console.WriteLine("Entrez le numéro du livre que vous souhaitez noter : ");
+        string saisie = Console.ReadLine();
+        int numero = int.Parse(saisie);
+        var livreANoter = livres[numero - 1];
+        Console.WriteLine($"Entrez votre note pour '{livreANoter.Titre}' (1 à 5) : ");
+        string noteSaisie = Console.ReadLine();
+        int note = int.Parse(noteSaisie);
+        db.NoterLivreDB(livreANoter.Id, note);
+        Console.WriteLine("Livre noté avec succès !");
     }
 
     static void SupprimerLivre(Database db)
