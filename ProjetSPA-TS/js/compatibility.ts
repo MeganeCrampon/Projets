@@ -1,21 +1,26 @@
 (function () {
 
-    const form = document.getElementById("compatibilityForm");
-    const name1Input = document.getElementById("name1");
-    const name2Input = document.getElementById("name2");
-    const result = document.getElementById("compatibilityResult");
-    const languageSelector = document.getElementById("languageSelector");
+    const form = document.getElementById("compatibilityForm") as HTMLFormElement | null;
+    const name1Input = document.getElementById("name1") as HTMLInputElement | null;
+    const name2Input = document.getElementById("name2") as HTMLInputElement | null;
+    const result = document.getElementById("compatibilityResult") as HTMLElement | null;
+    const languageSelector = document.getElementById("languageSelector") as HTMLSelectElement | null;
+
+
+    if (!form || !name1Input || !name2Input || !result || !languageSelector) {
+        return;
+    }
 
     // les emojis, dans le même ordre que les tranches (index 0 à 11)
     const fireworkEmojis = [
         "💀", "😬", "🥺", "😅", "🙃", "🙂", "😉", "😊", "😇", "🥰", "😍", "💖"
     ];
 
-    function capitalize(word) {
+    function capitalize(word: string) {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
-    function launchFireworks(emoji) {
+    function launchFireworks(emoji: string) {
         const fireworksDiv = document.createElement('div');
         fireworksDiv.classList.add('emoji-burst');
         document.body.appendChild(fireworksDiv);
@@ -54,22 +59,22 @@
         }, 1700);
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', (event: SubmitEvent) => {
         event.preventDefault();
 
-        const name1 = name1Input.value.trim().toLowerCase();
-        const name2 = name2Input.value.trim().toLowerCase();
-        const names = [name1, name2].sort();
-        const combinaison = names[0] + names[1];
+        const name1: string = name1Input.value.trim().toLowerCase();
+        const name2: string = name2Input.value.trim().toLowerCase();
+        const names: string[] = [name1, name2].sort();
+        const combinaison: string = names[0] + names[1];
 
-        let lettersSum = 0;
+        let lettersSum: number = 0;
         for (let l = 0; l < combinaison.length; l++) {
             lettersSum += combinaison.charCodeAt(l);
         }
 
-        const percentage = lettersSum % 101;
+        const percentage: number = lettersSum % 101;
 
-        let messageIndex;
+        let messageIndex: number;
 
         if (percentage === 0) {
             messageIndex = 0;
@@ -97,11 +102,11 @@
             messageIndex = 11;
         }
 
-        const currentLanguage = languageSelector.value;
+        const currentLanguage: string = languageSelector.value;
         const compatibilityTranslations = translations[currentLanguage].compatibility;
 
-        const message = compatibilityTranslations.messages[messageIndex];
-        const emoji = fireworkEmojis[messageIndex];
+        const message: string = compatibilityTranslations.messages[messageIndex];
+        const emoji: string = fireworkEmojis[messageIndex];
 
         launchFireworks(emoji);
 

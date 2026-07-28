@@ -1,5 +1,5 @@
-const navButtons = document.querySelectorAll('.nav-btn');
-const sections = document.querySelectorAll('.app-section');
+const navButtons = document.querySelectorAll<HTMLButtonElement>('.nav-btn');
+const sections = document.querySelectorAll<HTMLElement>('.app-section');
 
 navButtons.forEach(button => {
     button.addEventListener('click', () => {

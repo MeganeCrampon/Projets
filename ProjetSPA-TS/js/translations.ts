@@ -1,4 +1,49 @@
-const translations = {
+type Language = 'fr' | 'en';
+
+interface TranslationData {
+    SPA: {
+        title: string;
+    };
+    plushie: {
+        button: string;
+        title: string;
+        currency: string;
+        name: string;
+        hours: string;
+        minutes: string;
+        materialPrice: string;
+        patternPrice: string;
+        estimate: string;
+        namePlaceholder: string;
+        hoursPlaceholder: string;
+        minutesPlaceholder: string;
+        materialPricePlaceholder: string;
+        patternPricePlaceholder: string;
+        emptyResult: string;
+    };
+    converter: {
+        button: string;
+        title: string;
+        temperature: string;
+        cToF: string;
+        fToC: string;
+        convert: string;
+    };
+    compatibility: {
+        button: string;
+        title: string;
+        description: string;
+        name1: string;
+        name2: string;
+        calculate: string;
+        name1Placeholder: string;
+        name2Placeholder: string;
+        resultText: string;
+        messages: string[];
+    };
+}
+
+const translations: Record<Language, TranslationData> = {
     fr: {
         SPA: { title: "Ma petite SPA" },
         plushie: {
