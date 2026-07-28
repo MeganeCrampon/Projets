@@ -12,18 +12,22 @@
     }
 
     // les emojis, dans le même ordre que les tranches (index 0 à 11)
-    const fireworkEmojis = [
+    const fireworkEmojis: string[] = [
         "💀", "😬", "🥺", "😅", "🙃", "🙂", "😉", "😊", "😇", "🥰", "😍", "💖"
     ];
 
-    function capitalize(word: string) {
+    function capitalize(word: string) : string {
         return word.charAt(0).toUpperCase() + word.slice(1);
     }
 
-    function launchFireworks(emoji: string) {
-        const fireworksDiv = document.createElement('div');
+    function launchFireworks(emoji: string): void {
+        const fireworksDiv = document.createElement('div') as HTMLElement;
         fireworksDiv.classList.add('emoji-burst');
         document.body.appendChild(fireworksDiv);
+
+        if (!name1Input || !name2Input) {
+            return;
+        }
 
         const rect1 = name1Input.getBoundingClientRect();
         const rect2 = name2Input.getBoundingClientRect();
@@ -31,18 +35,18 @@
         const centerY = Math.min(rect1.top, rect2.top) - 20;
 
         for (let i = 0; i < 60; i++) {
-            const emojiParticle = document.createElement('span');
+            const emojiParticle = document.createElement('span') as HTMLElement;
             emojiParticle.textContent = emoji;
             emojiParticle.classList.add('emoji-particle');
 
             emojiParticle.style.left = `${centerX}px`;
             emojiParticle.style.top = `${centerY}px`;
 
-            const angle = Math.random() * 2 * Math.PI;
-            const distance = 250 + Math.random() * 300;
+            const angle: number = Math.random() * 2 * Math.PI;
+            const distance: number = 250 + Math.random() * 300;
 
-            const tx = Math.cos(angle) * distance;
-            const ty = Math.sin(angle) * distance;
+            const tx: number = Math.cos(angle) * distance;
+            const ty: number = Math.sin(angle) * distance;
 
             emojiParticle.style.setProperty("--tx-end", `${tx}px`);
             emojiParticle.style.setProperty("--ty-end", `${ty}px`);
@@ -102,7 +106,7 @@
             messageIndex = 11;
         }
 
-        const currentLanguage: string = languageSelector.value;
+        const currentLanguage: Language = languageSelector.value as Language;
         const compatibilityTranslations = translations[currentLanguage].compatibility;
 
         const message: string = compatibilityTranslations.messages[messageIndex];
@@ -113,7 +117,7 @@
         result.textContent = compatibilityTranslations.resultText
             .replace("{name1}", capitalize(name1))
             .replace("{name2}", capitalize(name2))
-            .replace("{percentage}", percentage)
+            .replace("{percentage}", percentage.toString())
             .replace("{message}", message);
     });
 
